@@ -1,0 +1,21 @@
+campaign_id,campaign_name,platform_id,region_id,business_unit,campaign_type,campaign_objective,start_date,end_date,campaign_status,created_at
+101,Summer Sale Search UK,1,1,Retail,Search,Conversion,2026-04-01,2026-06-15,active,2026-03-25
+102,Meta Retargeting Campaign,2,2,Retail,Social,Conversion,2026-04-03,2026-06-20,active,2026-03-26
+103,TikTok Awareness Push,3,3,Consumer,Social,Awareness,2026-04-05,2026-06-05,paused,2026-03-27
+104,LinkedIn Lead Gen Campaign,4,2,B2B,Social,Lead Generation,2026-04-07,2026-06-25,active,2026-03-28
+105,DV360 Prospecting Display,5,6,Retail,Programmatic,Traffic,2026-04-01,2026-05-31,completed,2026-03-21
+106,YouTube Product Launch Video,6,5,Consumer,Video,Awareness,2026-04-10,2026-06-29,active,2026-04-03
+107,Email CRM Retention UK,7,1,Retail,Email,Retention,2026-04-01,2026-06-29,active,2026-03-24
+108,Google Brand Search US,1,2,Retail,Search,Traffic,2026-04-15,2026-06-29,active,2026-04-06
+109,Meta Conversion Canada,2,4,Retail,Social,Conversion,2026-04-12,2026-06-12,paused,2026-04-02
+110,TikTok Summer Trend AU,3,5,Consumer,Social,Awareness,2026-04-18,2026-06-29,active,2026-04-07
+111,LinkedIn Webinar Lead Gen Germany,4,6,B2B,Social,Lead Generation,2026-04-20,2026-06-29,active,2026-04-13
+112,DV360 Retargeting France,5,7,Retail,Display,Conversion,2026-04-08,2026-06-18,active,2026-03-31
+113,YouTube Shorts Awareness India,6,3,Consumer,Video,Awareness,2026-04-02,2026-05-30,completed,2026-03-24
+114,Email Winback Campaign US,7,2,Retail,Email,Retention,2026-04-25,2026-06-29,active,2026-04-15
+115,Google Shopping Search Canada,1,4,Retail,Search,Conversion,2026-04-06,2026-06-29,active,2026-03-26
+116,Meta Lead Magnet UK,2,1,B2B,Social,Lead Generation,2026-04-14,2026-06-10,completed,2026-04-07
+117,Programmatic Prospecting US,5,2,Consumer,Programmatic,Traffic,2026-04-22,2026-06-29,active,2026-04-14
+118,LinkedIn ABM France,4,7,B2B,Social,Lead Generation,2026-05-01,2026-06-29,active,2026-04-22
+119,Autumn Preview Search Germany,1,6,Retail,Search,Traffic,2026-06-01,2026-06-29,planned,2026-05-22
+120,CRM Loyalty Newsletter AU,7,5,Retail,Email,Retention,2026-05-05,2026-06-29,planned,2026-04-24

@@ -1,0 +1,9 @@
+rule_id,rule_name,metric_name,condition_type,threshold_value,severity,rule_description
+1,High Spend Zero Conversion,conversions,equals,0,Critical,Trigger when spend is high but conversions are zero for a campaign period.
+2,ROAS Below Target,roas,less_than_target,1,High,Trigger when return on ad spend falls below the campaign target.
+3,CPA Above Target,cpa,greater_than_target,1,High,Trigger when cost per acquisition is above the campaign target.
+4,CTR Below Target,ctr,less_than_target,1,Medium,Trigger when click-through rate is below the campaign target.
+5,Spend Spike,spend,greater_than_previous_period,2,High,Trigger when spend is materially higher than the previous comparable period.
+6,Impression Drop,impressions,less_than_previous_period,0.5,Medium,Trigger when impressions fall sharply versus the previous comparable period.
+7,No Impressions Active Campaign,impressions,equals,0,Critical,Trigger when an active campaign records zero impressions.
+8,Budget Overspend,spend,greater_than_budget,1,High,Trigger when spend exceeds the allocated daily or total budget.

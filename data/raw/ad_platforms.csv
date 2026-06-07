@@ -1,0 +1,8 @@
+platform_id,platform_name,platform_category,is_paid_platform
+1,Google Ads,Search,1
+2,Meta Ads,Social,1
+3,TikTok Ads,Social,1
+4,LinkedIn Ads,Social,1
+5,DV360,Programmatic,1
+6,YouTube Ads,Video,1
+7,Email CRM,Email,0
