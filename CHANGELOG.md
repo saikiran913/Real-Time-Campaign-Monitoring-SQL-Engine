@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.0 - Phase 2 Staging Layer
+
+Added the Phase 2 staging and data quality layer.
+
+- Added `sql/03_create_staging_tables.sql`
+- Added `sql/04_data_quality_checks.sql`
+- Added staging tables
+- Added cleaning logic
+- Added data quality flags
+- Added campaign date validation
+- Added referential integrity checks
+- Added metric sanity checks
+- Added `docs/phase_2_staging_layer.md`
+- Updated README, run order, SQL documentation, validation documentation, architecture notes, interview explanation, data dictionary, and business rules
+- Documented the rule that bad rows are flagged and not removed silently
+
 ## 0.1.0 - Phase 1 Foundation
 
 Created the Phase 1 project foundation for the Real-Time Campaign Monitoring SQL Engine.
