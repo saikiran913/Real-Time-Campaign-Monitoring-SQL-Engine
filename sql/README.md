@@ -18,4 +18,10 @@ Bad rows are not removed silently. They remain in staging tables with flags such
 
 Contains SELECT-only checks for row counts, unknown campaign IDs, invalid dates, suspicious metrics, invalid budgets, invalid hourly records, missing alert rule details, and duplicate metric grains.
 
-Phase 2 includes staging and data quality logic only. KPI, budget pacing, alert evaluation, and campaign health score logic will be added in later phases.
+## 05_kpi_calculations.sql
+
+Drops and recreates the Phase 3 KPI tables using only Phase 2 staging tables as sources. It creates daily and hourly performance facts, campaign summaries, platform summaries, region summaries, and daily/hourly trend summaries.
+
+The script calculates CTR, CPC, CPM, CVR, CPA, ROAS, and AOV with `CASE WHEN` divide-by-zero handling. It also adds target comparison statuses where target values exist.
+
+Phase 3 includes KPI calculation logic only. Budget pacing, anomaly detection, alert evaluation, and campaign health score logic will be added in later phases.

@@ -20,6 +20,14 @@ The key design choice is that bad rows are not removed silently. They stay in st
 
 This prepares the project for Phase 3 KPI calculations by creating cleaner, more consistent inputs without hiding data quality problems.
 
+## How To Explain Phase 3
+
+In Phase 3, I created a KPI calculation engine on top of the staging layer. I calculated marketing KPIs such as CTR, CPC, CPM, CVR, CPA, ROAS, and AOV.
+
+I created daily, hourly, campaign, platform, region, and trend summary tables. I also added target comparison logic so each campaign can be evaluated against CTR, CPC, CPA, ROAS, and CVR targets.
+
+To make the layer trustworthy, I added validation and reconciliation checks that compare metric totals between the staging layer, KPI facts, and KPI summaries.
+
 ## What Future Phases Will Add
 
 Future phases will transform raw data into staging tables, calculate campaign KPIs, evaluate targets and budgets, generate alerts, assign campaign health scores, and produce output tables for reporting.

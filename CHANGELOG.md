@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 - Phase 3 KPI Calculation Engine
+
+Added the Phase 3 KPI calculation engine.
+
+- Added campaign daily performance fact table
+- Added campaign hourly performance fact table
+- Added campaign KPI summary table
+- Added platform KPI summary table
+- Added region KPI summary table
+- Added daily KPI trend summary
+- Added hourly KPI trend summary
+- Added KPI validation checks
+- Added KPI reconciliation checks
+- Updated documentation
+
 ## 0.2.0 - Phase 2 Staging Layer
 
 Added the Phase 2 staging and data quality layer.

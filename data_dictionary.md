@@ -246,3 +246,225 @@ The staging tables keep the raw row grain, apply light cleaning, and add data qu
 | severity | TEXT | Standardized severity. |
 | rule_description | TEXT | Trimmed plain-language rule description. |
 | alert_rule_quality_flag | TEXT | Alert rule quality result. |
+
+# Phase 3 KPI Tables
+
+Phase 3 KPI tables are built from Phase 2 staging tables only. They calculate performance KPIs, compare campaign results against targets, and aggregate performance across useful reporting grains.
+
+## fact_campaign_daily_performance
+
+Grain: one row per `campaign_id` per `metric_date`.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| metric_date | TEXT | Daily metric date. |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name from staging. |
+| platform_id | INTEGER | Platform identifier. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| region_id | INTEGER | Region identifier. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| currency | TEXT | Reporting currency. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Standardized campaign status. |
+| impressions | INTEGER | Daily impressions. |
+| clicks | INTEGER | Daily clicks. |
+| spend | REAL | Daily spend. |
+| conversions | INTEGER | Daily conversions. |
+| revenue | REAL | Daily revenue. |
+| ctr | REAL | Click-through rate, calculated as clicks divided by impressions. |
+| cpc | REAL | Cost per click, calculated as spend divided by clicks. |
+| cpm | REAL | Cost per thousand impressions. |
+| cvr | REAL | Conversion rate, calculated as conversions divided by clicks. |
+| cpa | REAL | Cost per acquisition, calculated as spend divided by conversions. |
+| roas | REAL | Return on ad spend, calculated as revenue divided by spend. |
+| aov | REAL | Average order value, calculated as revenue divided by conversions. |
+| target_ctr | REAL | Campaign target CTR. |
+| target_cpc | REAL | Campaign target CPC. |
+| target_cpa | REAL | Campaign target CPA. |
+| target_roas | REAL | Campaign target ROAS. |
+| target_cvr | REAL | Campaign target CVR. |
+| ctr_target_status | TEXT | CTR target comparison result. |
+| cpc_target_status | TEXT | CPC target comparison result. |
+| cpa_target_status | TEXT | CPA target comparison result. |
+| roas_target_status | TEXT | ROAS target comparison result. |
+| cvr_target_status | TEXT | CVR target comparison result. |
+| metric_quality_flag | TEXT | Carried-forward Phase 2 metric quality flag. |
+| is_campaign_date_valid | INTEGER | Carried-forward campaign date validation flag. |
+| is_known_campaign | INTEGER | Carried-forward known campaign flag. |
+
+## fact_campaign_hourly_performance
+
+Grain: one row per `campaign_id` per `metric_date` per `metric_hour`.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| metric_datetime | TEXT | Hourly metric timestamp. |
+| metric_date | TEXT | Hourly metric date. |
+| metric_hour | INTEGER | Hour of day from 0 to 23. |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name from staging. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| currency | TEXT | Reporting currency. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Standardized campaign status. |
+| impressions | INTEGER | Hourly impressions. |
+| clicks | INTEGER | Hourly clicks. |
+| spend | REAL | Hourly spend. |
+| conversions | INTEGER | Hourly conversions. |
+| revenue | REAL | Hourly revenue. |
+| ctr | REAL | Hourly click-through rate. |
+| cpc | REAL | Hourly cost per click. |
+| cpm | REAL | Hourly cost per thousand impressions. |
+| cvr | REAL | Hourly conversion rate. |
+| cpa | REAL | Hourly cost per acquisition. |
+| roas | REAL | Hourly return on ad spend. |
+| aov | REAL | Hourly average order value. |
+| ctr_target_status | TEXT | CTR target comparison result. |
+| cpc_target_status | TEXT | CPC target comparison result. |
+| cpa_target_status | TEXT | CPA target comparison result. |
+| roas_target_status | TEXT | ROAS target comparison result. |
+| cvr_target_status | TEXT | CVR target comparison result. |
+| metric_quality_flag | TEXT | Carried-forward Phase 2 metric quality flag. |
+| hourly_quality_flag | TEXT | Carried-forward Phase 2 hourly quality flag. |
+| is_campaign_date_valid | INTEGER | Carried-forward campaign date validation flag. |
+| is_known_campaign | INTEGER | Carried-forward known campaign flag. |
+
+## campaign_kpi_summary
+
+Grain: one row per campaign.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Standardized campaign status. |
+| first_metric_date | TEXT | First metric date for the campaign. |
+| last_metric_date | TEXT | Last metric date for the campaign. |
+| active_metric_days | INTEGER | Count of metric dates for the campaign. |
+| total_impressions | INTEGER | Total impressions. |
+| total_clicks | INTEGER | Total clicks. |
+| total_spend | REAL | Total spend. |
+| total_conversions | INTEGER | Total conversions. |
+| total_revenue | REAL | Total revenue. |
+| overall_ctr | REAL | Campaign-level CTR. |
+| overall_cpc | REAL | Campaign-level CPC. |
+| overall_cpm | REAL | Campaign-level CPM. |
+| overall_cvr | REAL | Campaign-level CVR. |
+| overall_cpa | REAL | Campaign-level CPA. |
+| overall_roas | REAL | Campaign-level ROAS. |
+| overall_aov | REAL | Campaign-level AOV. |
+| target_ctr | REAL | Campaign target CTR. |
+| target_cpc | REAL | Campaign target CPC. |
+| target_cpa | REAL | Campaign target CPA. |
+| target_roas | REAL | Campaign target ROAS. |
+| target_cvr | REAL | Campaign target CVR. |
+| overall_ctr_target_status | TEXT | Campaign-level CTR target comparison. |
+| overall_cpc_target_status | TEXT | Campaign-level CPC target comparison. |
+| overall_cpa_target_status | TEXT | Campaign-level CPA target comparison. |
+| overall_roas_target_status | TEXT | Campaign-level ROAS target comparison. |
+| overall_cvr_target_status | TEXT | Campaign-level CVR target comparison. |
+
+## platform_kpi_summary
+
+Grain: one row per platform name and platform category.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| campaign_count | INTEGER | Count of campaigns on the platform. |
+| total_impressions | INTEGER | Total impressions. |
+| total_clicks | INTEGER | Total clicks. |
+| total_spend | REAL | Total spend. |
+| total_conversions | INTEGER | Total conversions. |
+| total_revenue | REAL | Total revenue. |
+| overall_ctr | REAL | Platform-level CTR. |
+| overall_cpc | REAL | Platform-level CPC. |
+| overall_cpm | REAL | Platform-level CPM. |
+| overall_cvr | REAL | Platform-level CVR. |
+| overall_cpa | REAL | Platform-level CPA. |
+| overall_roas | REAL | Platform-level ROAS. |
+| overall_aov | REAL | Platform-level AOV. |
+
+## region_kpi_summary
+
+Grain: one row per country, region, and currency.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| currency | TEXT | Reporting currency. |
+| campaign_count | INTEGER | Count of campaigns in the region. |
+| total_impressions | INTEGER | Total impressions. |
+| total_clicks | INTEGER | Total clicks. |
+| total_spend | REAL | Total spend. |
+| total_conversions | INTEGER | Total conversions. |
+| total_revenue | REAL | Total revenue. |
+| overall_ctr | REAL | Region-level CTR. |
+| overall_cpc | REAL | Region-level CPC. |
+| overall_cpm | REAL | Region-level CPM. |
+| overall_cvr | REAL | Region-level CVR. |
+| overall_cpa | REAL | Region-level CPA. |
+| overall_roas | REAL | Region-level ROAS. |
+| overall_aov | REAL | Region-level AOV. |
+
+## daily_kpi_trend_summary
+
+Grain: one row per metric date.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| metric_date | TEXT | Metric date. |
+| campaign_count | INTEGER | Count of campaigns with metrics on the date. |
+| total_impressions | INTEGER | Total impressions. |
+| total_clicks | INTEGER | Total clicks. |
+| total_spend | REAL | Total spend. |
+| total_conversions | INTEGER | Total conversions. |
+| total_revenue | REAL | Total revenue. |
+| daily_ctr | REAL | Daily CTR. |
+| daily_cpc | REAL | Daily CPC. |
+| daily_cpm | REAL | Daily CPM. |
+| daily_cvr | REAL | Daily CVR. |
+| daily_cpa | REAL | Daily CPA. |
+| daily_roas | REAL | Daily ROAS. |
+| daily_aov | REAL | Daily AOV. |
+
+## hourly_kpi_trend_summary
+
+Grain: one row per metric date and metric hour.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| metric_date | TEXT | Metric date. |
+| metric_hour | INTEGER | Hour of day. |
+| campaign_count | INTEGER | Count of campaigns with metrics in the hour. |
+| total_impressions | INTEGER | Total impressions. |
+| total_clicks | INTEGER | Total clicks. |
+| total_spend | REAL | Total spend. |
+| total_conversions | INTEGER | Total conversions. |
+| total_revenue | REAL | Total revenue. |
+| hourly_ctr | REAL | Hourly CTR. |
+| hourly_cpc | REAL | Hourly CPC. |
+| hourly_cpm | REAL | Hourly CPM. |
+| hourly_cvr | REAL | Hourly CVR. |
+| hourly_cpa | REAL | Hourly CPA. |
+| hourly_roas | REAL | Hourly ROAS. |
+| hourly_aov | REAL | Hourly AOV. |
