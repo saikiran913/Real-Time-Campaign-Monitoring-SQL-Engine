@@ -1,33 +1,45 @@
 # Interview Explanation
 
-## How To Explain This Project
+## 30-Second Explanation
 
-This project is a SQL-first campaign monitoring engine built locally in SQLite. Phase 1 focuses on the foundation: realistic synthetic source data, raw table creation, data loading, and validation checks.
+I built a SQL-first campaign monitoring engine in SQLite. It simulates campaign data, cleans it, calculates KPIs, monitors budget pacing, detects anomalies, generates alerts, and assigns campaign health scores.
 
-## Why This Project Is Useful
+## 2-Minute Explanation
 
-It mirrors a common analytics engineering problem: marketing teams need clean, reliable campaign data before they can calculate KPIs, monitor budgets, or trigger performance alerts.
+The project starts with synthetic marketing campaign data and loads it into raw SQLite tables. I then created a staging layer with cleaning and quality flags, a KPI layer for metrics like CTR, CPC, CPA, ROAS, and AOV, and a monitoring layer for budget pacing and trend comparisons.
 
-## What Phase 1 Proves
+On top of that, I built SQL-based anomaly detection, alert severity, recommended actions, health scoring, and investigation scenarios. The project includes validation and reconciliation scripts so the pipeline can be reviewed end to end.
 
-Phase 1 proves that the project has a clear schema, consistent synthetic datasets, repeatable setup scripts, and basic validation coverage. It also shows discipline around scope by keeping staging, KPIs, alerts, dashboards, and orchestration for later phases.
+## Technical Explanation
 
-## How To Explain Phase 2
+The project demonstrates layered SQL modeling, window functions, CASE-based business rules, reconciliation checks, staged transformations, KPI calculations, alert rule mapping, and final validation. It uses SQLite-compatible SQL only.
 
-In Phase 2, I created a staging layer to clean and standardize raw campaign data. I added quality flags to detect invalid campaign dates, metric issues, invalid budgets, unknown campaign IDs, and invalid hourly records.
+## Business Explanation
 
-The key design choice is that bad rows are not removed silently. They stay in staging tables and are flagged so the business can review them before later KPI calculations use the data.
+The engine helps a marketing team identify overspend, underperformance, ROAS drops, conversion drops, delivery issues, and campaigns requiring immediate attention.
 
-This prepares the project for Phase 3 KPI calculations by creating cleaner, more consistent inputs without hiding data quality problems.
+## Skills Demonstrated
 
-## How To Explain Phase 3
+- SQL data engineering
+- Data modeling
+- Data quality checks
+- KPI design
+- Window functions
+- Budget pacing logic
+- Alert generation
+- Health score design
+- Technical documentation
 
-In Phase 3, I created a KPI calculation engine on top of the staging layer. I calculated marketing KPIs such as CTR, CPC, CPM, CVR, CPA, ROAS, and AOV.
+## Possible Interview Questions And Answers
 
-I created daily, hourly, campaign, platform, region, and trend summary tables. I also added target comparison logic so each campaign can be evaluated against CTR, CPC, CPA, ROAS, and CVR targets.
+**Why did you use SQLite?**  
+To keep the project local, easy to run, and SQL-first for portfolio review.
 
-To make the layer trustworthy, I added validation and reconciliation checks that compare metric totals between the staging layer, KPI facts, and KPI summaries.
+**How do you avoid bad data disappearing?**  
+The staging layer flags bad records instead of deleting them silently.
 
-## What Future Phases Will Add
+**How do you know the outputs are trustworthy?**  
+The project includes validation, row count checks, metric reconciliation, and final pipeline checks.
 
-Future phases will transform raw data into staging tables, calculate campaign KPIs, evaluate targets and budgets, generate alerts, assign campaign health scores, and produce output tables for reporting.
+**What would you add in production?**  
+Real API ingestion, orchestration, a warehouse version, dashboards, alert notifications, and stronger testing.

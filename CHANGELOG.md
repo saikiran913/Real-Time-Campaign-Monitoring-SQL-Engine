@@ -1,5 +1,49 @@
 # Changelog
 
+## 1.0.0 - Final Project Completion
+
+Completed the Version 1.0 SQL portfolio project.
+
+- Completed final documentation polish
+- Added final project validation script
+- Added final pipeline validation checks
+- Added final business output checks
+- Added sample output queries
+- Added final project walkthrough
+- Added manual testing checklist
+- Added GitHub portfolio description
+- Updated README as final project landing page
+- Updated run order as final source of truth
+- Marked project as Version 1.0 complete
+
+## 0.5.0 - Phase 5 Anomaly Detection, Alerts, and Health Score
+
+Added the Phase 5 anomaly detection, alert, health score, and investigation layer.
+
+- Added campaign anomaly detection table
+- Added campaign alert summary table
+- Added campaign health score table
+- Added critical campaign summary table
+- Added campaign alert rule mapping table
+- Added anomaly detection validation checks
+- Added alert validation checks
+- Added health score validation checks
+- Added investigation scenario SQL files
+- Updated documentation
+
+## 0.4.0 - Phase 4 Budget Pacing and Performance Monitoring
+
+Added the Phase 4 budget pacing and performance monitoring layer.
+
+- Added campaign daily budget pacing table
+- Added campaign budget pacing summary table
+- Added daily performance monitoring table
+- Added performance monitoring summary table
+- Added campaign monitoring dashboard summary table
+- Added budget pacing validation checks
+- Added performance monitoring validation checks
+- Updated documentation
+
 ## 0.3.0 - Phase 3 KPI Calculation Engine
 
 Added the Phase 3 KPI calculation engine.

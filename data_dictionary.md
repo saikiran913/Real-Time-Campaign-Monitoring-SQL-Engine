@@ -468,3 +468,438 @@ Grain: one row per metric date and metric hour.
 | hourly_cpa | REAL | Hourly CPA. |
 | hourly_roas | REAL | Hourly ROAS. |
 | hourly_aov | REAL | Hourly AOV. |
+
+# Phase 4 Budget Pacing And Monitoring Tables
+
+Phase 4 tables are built from Phase 3 KPI tables and Phase 2 staging budget/campaign tables. They monitor spend pacing and performance trends. They do not create final alerts or campaign health scores.
+
+## campaign_budget_pacing_daily
+
+Grain: one row per campaign per metric date.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| metric_date | TEXT | Daily metric date. |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| start_date | TEXT | Campaign start date. |
+| end_date | TEXT | Campaign end date. |
+| total_budget | REAL | Total allocated campaign budget. |
+| daily_budget | REAL | Expected daily budget. |
+| budget_start_date | TEXT | Budget start date. |
+| budget_end_date | TEXT | Budget end date. |
+| campaign_duration_days | INTEGER | Campaign duration in days. |
+| budget_duration_days | INTEGER | Budget duration in days. |
+| campaign_day_number | INTEGER | Metric date position within campaign dates. |
+| budget_day_number | INTEGER | Metric date position within budget dates. |
+| total_impressions | INTEGER | Daily impressions from KPI fact. |
+| total_clicks | INTEGER | Daily clicks from KPI fact. |
+| daily_spend | REAL | Daily spend from KPI fact. |
+| daily_conversions | INTEGER | Daily conversions from KPI fact. |
+| daily_revenue | REAL | Daily revenue from KPI fact. |
+| actual_spend_to_date | REAL | Cumulative campaign spend through metric date. |
+| expected_spend_to_date | REAL | Expected spend through metric date. |
+| remaining_budget | REAL | Budget remaining after actual spend to date. |
+| spend_variance_amount | REAL | Actual spend to date minus expected spend to date. |
+| spend_variance_percentage | REAL | Spend variance divided by expected spend to date. |
+| pacing_ratio | REAL | Actual spend to date divided by expected spend to date. |
+| projected_total_spend | REAL | Projected final spend based on current pacing. |
+| projected_budget_variance | REAL | Projected total spend minus total budget. |
+| budget_utilization_percentage | REAL | Actual spend to date divided by total budget. |
+| budget_pacing_status | TEXT | Budget pacing category. |
+| budget_risk_level | TEXT | Budget risk category. |
+
+## campaign_budget_pacing_summary
+
+Grain: one latest budget pacing row per campaign.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| latest_metric_date | TEXT | Latest campaign metric date. |
+| total_budget | REAL | Total allocated campaign budget. |
+| daily_budget | REAL | Expected daily budget. |
+| actual_spend_to_date | REAL | Cumulative spend through latest date. |
+| expected_spend_to_date | REAL | Expected spend through latest date. |
+| remaining_budget | REAL | Budget remaining after actual spend to date. |
+| spend_variance_amount | REAL | Actual spend to date minus expected spend to date. |
+| spend_variance_percentage | REAL | Spend variance divided by expected spend to date. |
+| pacing_ratio | REAL | Actual spend to date divided by expected spend to date. |
+| projected_total_spend | REAL | Projected final spend. |
+| projected_budget_variance | REAL | Projected total spend minus total budget. |
+| budget_utilization_percentage | REAL | Budget utilization percentage. |
+| budget_pacing_status | TEXT | Budget pacing category. |
+| budget_risk_level | TEXT | Budget risk category. |
+
+## campaign_daily_performance_monitoring
+
+Grain: one row per campaign per metric date.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| metric_date | TEXT | Daily metric date. |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| impressions | INTEGER | Daily impressions. |
+| clicks | INTEGER | Daily clicks. |
+| spend | REAL | Daily spend. |
+| conversions | INTEGER | Daily conversions. |
+| revenue | REAL | Daily revenue. |
+| ctr | REAL | Daily CTR. |
+| cpc | REAL | Daily CPC. |
+| cpm | REAL | Daily CPM. |
+| cvr | REAL | Daily CVR. |
+| cpa | REAL | Daily CPA. |
+| roas | REAL | Daily ROAS. |
+| aov | REAL | Daily AOV. |
+| previous_day_impressions | INTEGER | Previous campaign metric row impressions. |
+| previous_day_clicks | INTEGER | Previous campaign metric row clicks. |
+| previous_day_spend | REAL | Previous campaign metric row spend. |
+| previous_day_conversions | INTEGER | Previous campaign metric row conversions. |
+| previous_day_revenue | REAL | Previous campaign metric row revenue. |
+| previous_day_ctr | REAL | Previous campaign metric row CTR. |
+| previous_day_cpc | REAL | Previous campaign metric row CPC. |
+| previous_day_cpa | REAL | Previous campaign metric row CPA. |
+| previous_day_roas | REAL | Previous campaign metric row ROAS. |
+| impressions_day_over_day_change_pct | REAL | Impressions change versus previous row. |
+| clicks_day_over_day_change_pct | REAL | Clicks change versus previous row. |
+| spend_day_over_day_change_pct | REAL | Spend change versus previous row. |
+| conversions_day_over_day_change_pct | REAL | Conversions change versus previous row. |
+| revenue_day_over_day_change_pct | REAL | Revenue change versus previous row. |
+| ctr_day_over_day_change_pct | REAL | CTR change versus previous row. |
+| cpc_day_over_day_change_pct | REAL | CPC change versus previous row. |
+| cpa_day_over_day_change_pct | REAL | CPA change versus previous row. |
+| roas_day_over_day_change_pct | REAL | ROAS change versus previous row. |
+| avg_7d_impressions | REAL | Previous seven-row average impressions. |
+| avg_7d_clicks | REAL | Previous seven-row average clicks. |
+| avg_7d_spend | REAL | Previous seven-row average spend. |
+| avg_7d_conversions | REAL | Previous seven-row average conversions. |
+| avg_7d_revenue | REAL | Previous seven-row average revenue. |
+| avg_7d_ctr | REAL | Previous seven-row average CTR. |
+| avg_7d_cpc | REAL | Previous seven-row average CPC. |
+| avg_7d_cpa | REAL | Previous seven-row average CPA. |
+| avg_7d_roas | REAL | Previous seven-row average ROAS. |
+| impressions_vs_7d_avg_pct | REAL | Impressions change versus 7-day baseline. |
+| clicks_vs_7d_avg_pct | REAL | Clicks change versus 7-day baseline. |
+| spend_vs_7d_avg_pct | REAL | Spend change versus 7-day baseline. |
+| conversions_vs_7d_avg_pct | REAL | Conversions change versus 7-day baseline. |
+| revenue_vs_7d_avg_pct | REAL | Revenue change versus 7-day baseline. |
+| ctr_vs_7d_avg_pct | REAL | CTR change versus 7-day baseline. |
+| cpc_vs_7d_avg_pct | REAL | CPC change versus 7-day baseline. |
+| cpa_vs_7d_avg_pct | REAL | CPA change versus 7-day baseline. |
+| roas_vs_7d_avg_pct | REAL | ROAS change versus 7-day baseline. |
+| traffic_trend_status | TEXT | Traffic trend label. |
+| conversion_trend_status | TEXT | Conversion trend label. |
+| spend_trend_status | TEXT | Spend trend label. |
+| roas_trend_status | TEXT | ROAS trend label. |
+| overall_performance_watch_status | TEXT | Combined watch status. |
+
+## campaign_performance_monitoring_summary
+
+Grain: one latest performance monitoring row per campaign.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| latest_metric_date | TEXT | Latest campaign metric date. |
+| impressions | INTEGER | Latest impressions. |
+| clicks | INTEGER | Latest clicks. |
+| spend | REAL | Latest spend. |
+| conversions | INTEGER | Latest conversions. |
+| revenue | REAL | Latest revenue. |
+| ctr | REAL | Latest CTR. |
+| cpc | REAL | Latest CPC. |
+| cpa | REAL | Latest CPA. |
+| roas | REAL | Latest ROAS. |
+| impressions_vs_7d_avg_pct | REAL | Latest impressions change versus 7-day baseline. |
+| clicks_vs_7d_avg_pct | REAL | Latest clicks change versus 7-day baseline. |
+| spend_vs_7d_avg_pct | REAL | Latest spend change versus 7-day baseline. |
+| conversions_vs_7d_avg_pct | REAL | Latest conversions change versus 7-day baseline. |
+| revenue_vs_7d_avg_pct | REAL | Latest revenue change versus 7-day baseline. |
+| ctr_vs_7d_avg_pct | REAL | Latest CTR change versus 7-day baseline. |
+| cpa_vs_7d_avg_pct | REAL | Latest CPA change versus 7-day baseline. |
+| roas_vs_7d_avg_pct | REAL | Latest ROAS change versus 7-day baseline. |
+| traffic_trend_status | TEXT | Latest traffic trend label. |
+| conversion_trend_status | TEXT | Latest conversion trend label. |
+| spend_trend_status | TEXT | Latest spend trend label. |
+| roas_trend_status | TEXT | Latest ROAS trend label. |
+| overall_performance_watch_status | TEXT | Latest combined watch status. |
+
+## campaign_monitoring_dashboard_summary
+
+Grain: one row per campaign.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| total_impressions | INTEGER | Campaign total impressions. |
+| total_clicks | INTEGER | Campaign total clicks. |
+| total_spend | REAL | Campaign total spend. |
+| total_conversions | INTEGER | Campaign total conversions. |
+| total_revenue | REAL | Campaign total revenue. |
+| overall_ctr | REAL | Campaign overall CTR. |
+| overall_cpc | REAL | Campaign overall CPC. |
+| overall_cpa | REAL | Campaign overall CPA. |
+| overall_roas | REAL | Campaign overall ROAS. |
+| total_budget | REAL | Total allocated budget. |
+| actual_spend_to_date | REAL | Actual spend through latest date. |
+| remaining_budget | REAL | Remaining budget. |
+| budget_utilization_percentage | REAL | Budget utilization percentage. |
+| pacing_ratio | REAL | Budget pacing ratio. |
+| projected_total_spend | REAL | Projected total spend. |
+| projected_budget_variance | REAL | Projected total spend minus total budget. |
+| budget_pacing_status | TEXT | Budget pacing category. |
+| budget_risk_level | TEXT | Budget risk category. |
+| latest_metric_date | TEXT | Latest monitoring metric date. |
+| traffic_trend_status | TEXT | Latest traffic trend label. |
+| conversion_trend_status | TEXT | Latest conversion trend label. |
+| spend_trend_status | TEXT | Latest spend trend label. |
+| roas_trend_status | TEXT | Latest ROAS trend label. |
+| overall_performance_watch_status | TEXT | Latest combined watch status. |
+
+# Phase 5 Anomaly Detection, Alerts, And Health Score Tables
+
+Phase 5 tables use Phase 4 monitoring outputs as the main source. They flag anomalies, generate alert messages, calculate health scores, identify critical campaigns, and map generated alert categories to configured alert rules.
+
+## campaign_anomaly_detection
+
+Grain: one row per campaign.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| latest_metric_date | TEXT | Latest monitoring metric date. |
+| total_impressions | INTEGER | Campaign total impressions. |
+| total_clicks | INTEGER | Campaign total clicks. |
+| total_spend | REAL | Campaign total spend. |
+| total_conversions | INTEGER | Campaign total conversions. |
+| total_revenue | REAL | Campaign total revenue. |
+| overall_ctr | REAL | Campaign overall CTR. |
+| overall_cpc | REAL | Campaign overall CPC. |
+| overall_cpa | REAL | Campaign overall CPA. |
+| overall_roas | REAL | Campaign overall ROAS. |
+| target_ctr | REAL | Campaign target CTR used for anomaly logic. |
+| target_cpa | REAL | Campaign target CPA used for anomaly logic. |
+| target_roas | REAL | Campaign target ROAS used for anomaly logic. |
+| total_budget | REAL | Total allocated campaign budget. |
+| actual_spend_to_date | REAL | Actual spend through latest date. |
+| remaining_budget | REAL | Remaining budget. |
+| budget_utilization_percentage | REAL | Budget utilization percentage. |
+| pacing_ratio | REAL | Budget pacing ratio. |
+| projected_total_spend | REAL | Projected total spend. |
+| projected_budget_variance | REAL | Projected total spend minus total budget. |
+| budget_pacing_status | TEXT | Budget pacing status from Phase 4. |
+| budget_risk_level | TEXT | Budget risk level from Phase 4. |
+| traffic_trend_status | TEXT | Traffic trend status from Phase 4. |
+| conversion_trend_status | TEXT | Conversion trend status from Phase 4. |
+| spend_trend_status | TEXT | Spend trend status from Phase 4. |
+| roas_trend_status | TEXT | ROAS trend status from Phase 4. |
+| overall_performance_watch_status | TEXT | Overall performance watch status from Phase 4. |
+| high_spend_zero_conversion_flag | INTEGER | 1 when spend is high and conversions are zero. |
+| roas_below_target_flag | INTEGER | 1 when ROAS is below target. |
+| cpa_above_target_flag | INTEGER | 1 when CPA is above target. |
+| ctr_below_target_flag | INTEGER | 1 when CTR is below target. |
+| budget_overspend_flag | INTEGER | 1 when budget pacing indicates overspend. |
+| budget_underspend_flag | INTEGER | 1 when budget pacing indicates underspend. |
+| spend_spike_flag | INTEGER | 1 when spend trend indicates a spike. |
+| traffic_drop_flag | INTEGER | 1 when traffic trend indicates a drop. |
+| conversion_drop_flag | INTEGER | 1 when conversion trend indicates a drop. |
+| roas_drop_flag | INTEGER | 1 when ROAS trend indicates a drop. |
+| no_impressions_active_campaign_flag | INTEGER | 1 when an active campaign has zero impressions. |
+| poor_efficiency_flag | INTEGER | 1 when spend is greater than revenue. |
+| anomaly_count | INTEGER | Total anomaly flags for the campaign. |
+| critical_anomaly_count | INTEGER | Count of critical anomaly signals. |
+| high_anomaly_count | INTEGER | Count of high anomaly signals. |
+| medium_anomaly_count | INTEGER | Count of medium anomaly signals. |
+| low_anomaly_count | INTEGER | Reserved count for future low anomaly signals. |
+
+## campaign_alert_summary
+
+Grain: one row per campaign.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| latest_metric_date | TEXT | Latest monitoring metric date. |
+| total_spend | REAL | Campaign total spend. |
+| total_conversions | INTEGER | Campaign total conversions. |
+| total_revenue | REAL | Campaign total revenue. |
+| overall_ctr | REAL | Campaign overall CTR. |
+| overall_cpa | REAL | Campaign overall CPA. |
+| overall_roas | REAL | Campaign overall ROAS. |
+| budget_pacing_status | TEXT | Budget pacing status. |
+| budget_risk_level | TEXT | Budget risk level. |
+| overall_performance_watch_status | TEXT | Overall performance watch status. |
+| anomaly_count | INTEGER | Total anomaly count. |
+| critical_anomaly_count | INTEGER | Critical anomaly count. |
+| high_anomaly_count | INTEGER | High anomaly count. |
+| medium_anomaly_count | INTEGER | Medium anomaly count. |
+| low_anomaly_count | INTEGER | Low anomaly count. |
+| alert_required | INTEGER | 1 when an alert is required. |
+| alert_severity | TEXT | Alert severity classification. |
+| primary_alert_category | TEXT | Highest-priority alert category. |
+| alert_message | TEXT | Business-readable alert message. |
+| recommended_action | TEXT | Business-readable recommended action. |
+
+## campaign_health_score
+
+Grain: one row per campaign.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| latest_metric_date | TEXT | Latest monitoring metric date. |
+| total_spend | REAL | Campaign total spend. |
+| total_revenue | REAL | Campaign total revenue. |
+| overall_ctr | REAL | Campaign overall CTR. |
+| overall_cpa | REAL | Campaign overall CPA. |
+| overall_roas | REAL | Campaign overall ROAS. |
+| budget_pacing_status | TEXT | Budget pacing status. |
+| budget_risk_level | TEXT | Budget risk level. |
+| overall_performance_watch_status | TEXT | Overall performance watch status. |
+| anomaly_count | INTEGER | Total anomaly count. |
+| alert_required | INTEGER | 1 when an alert is required. |
+| alert_severity | TEXT | Alert severity classification. |
+| primary_alert_category | TEXT | Highest-priority alert category. |
+| base_score | INTEGER | Starting score before deductions. |
+| kpi_score_adjustment | INTEGER | KPI-related score adjustment. |
+| budget_score_adjustment | INTEGER | Budget-related score adjustment. |
+| trend_score_adjustment | INTEGER | Trend-related score adjustment. |
+| anomaly_score_adjustment | INTEGER | Anomaly-related score adjustment. |
+| final_health_score | INTEGER | Capped 0 to 100 campaign health score. |
+| health_status | TEXT | Critical, At Risk, Watch, or Healthy. |
+| main_issue | TEXT | Main issue copied from primary alert category. |
+| recommended_action | TEXT | Recommended action from alert summary. |
+
+## critical_campaign_summary
+
+Grain: one row per campaign that requires attention.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| platform_name | TEXT | Platform name. |
+| platform_category | TEXT | Platform category. |
+| country | TEXT | Country value. |
+| region_name | TEXT | Region name. |
+| business_unit | TEXT | Campaign business unit. |
+| campaign_type | TEXT | Campaign type. |
+| campaign_objective | TEXT | Campaign objective. |
+| campaign_status | TEXT | Campaign status. |
+| latest_metric_date | TEXT | Latest monitoring metric date. |
+| total_spend | REAL | Campaign total spend. |
+| total_revenue | REAL | Campaign total revenue. |
+| overall_roas | REAL | Campaign overall ROAS. |
+| budget_pacing_status | TEXT | Budget pacing status. |
+| overall_performance_watch_status | TEXT | Overall performance watch status. |
+| anomaly_count | INTEGER | Total anomaly count. |
+| alert_severity | TEXT | Alert severity classification. |
+| primary_alert_category | TEXT | Highest-priority alert category. |
+| final_health_score | INTEGER | Campaign health score. |
+| health_status | TEXT | Campaign health status. |
+| main_issue | TEXT | Main issue to investigate. |
+| recommended_action | TEXT | Recommended action. |
+
+## campaign_alert_rule_mapping
+
+Grain: one row per campaign alert where possible.
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| campaign_id | INTEGER | Campaign identifier. |
+| campaign_name | TEXT | Campaign name. |
+| primary_alert_category | TEXT | Generated primary alert category. |
+| alert_severity | TEXT | Generated alert severity. |
+| configured_rule_name | TEXT | Matching configured rule name when available. |
+| configured_metric_name | TEXT | Configured metric name. |
+| configured_condition_type | TEXT | Configured condition type. |
+| configured_threshold_value | REAL | Configured threshold value. |
+| configured_severity | TEXT | Configured severity. |
+| rule_description | TEXT | Configured rule description. |
+| rule_mapping_status | TEXT | Mapping status for the generated alert. |
+
+# Phase 6 Final Validation Outputs
+
+Phase 6 does not create new business tables. It adds SELECT-only final validation and sample output queries.
+
+## Final Validation Query Outputs
+
+| Output | Description |
+| --- | --- |
+| Table existence summary | Confirms major raw, staging, KPI, monitoring, alert, and health score tables exist. |
+| Row count summary | Shows final row counts for important tables. |
+| Data flow checks | Compares row counts between raw, staging, KPI, alert, and health score outputs. |
+| Metric reconciliation | Reconciles impressions, clicks, spend, conversions, and revenue between staging and KPI fact tables. |
+| Business output summary | Summarizes campaigns, alerts, health status, spend, revenue, and ROAS. |
+| Severity distributions | Shows counts by alert severity, health status, budget pacing status, and performance watch status. |

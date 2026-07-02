@@ -1,22 +1,33 @@
 # Project Overview
 
-## Business Problem
+## Final Project Overview
 
-Campaign performance can change quickly. A campaign may spend heavily without conversions, lose impressions unexpectedly, or underperform against target CTR, CPA, CVR, or ROAS. Teams need clean data foundations before they can detect these issues reliably.
+The Real-Time Campaign Monitoring SQL Engine is a Version 1.0 SQL portfolio project that simulates campaign monitoring in SQLite. It turns synthetic marketing campaign data into cleaned staging tables, KPI outputs, budget pacing, anomaly detection, alerts, campaign health scores, and investigation scenarios.
 
-## Why Campaign Monitoring Matters
+## Business Use Case
 
-Monitoring protects budget, helps teams respond faster, and gives marketing analysts a repeatable way to separate normal performance variation from problems that need action.
+The project models how a marketing analytics team could monitor campaign performance and quickly identify budget or performance issues.
 
-## What This SQL Engine Will Eventually Do
+## Real-Time Simulation
 
-The future engine will clean raw campaign data, calculate KPIs, compare performance against targets and budgets, flag alert conditions, and provide datasets suitable for reporting.
+The project does not stream live data. Instead, it simulates real-time monitoring with daily and hourly synthetic campaign metrics, pacing calculations, trend comparisons, and alert outputs.
 
-## Phase-Wise Direction
+## Final Capabilities
 
-- Phase 1: Raw data foundation, SQLite DDL, sample inserts, and validation checks.
-- Phase 2: Staging layer with cleaned and typed records.
-- Phase 3: KPI engine for CTR, CPC, CPA, CVR, ROAS, and revenue efficiency.
-- Phase 4: Budget pacing and spend monitoring.
-- Phase 5: Alert engine and campaign health score.
-- Phase 6: Final documentation, sample outputs, and GitHub polish.
+- Raw and staging data layers.
+- KPI calculation engine.
+- Budget pacing and projected spend.
+- Previous-day and 7-day monitoring.
+- Anomaly detection and alerts.
+- Campaign health scoring.
+- Critical campaign summaries.
+- Investigation queries.
+- Final validation and sample outputs.
+
+## Why Each Phase Was Built
+
+Each phase adds one layer of the analytics workflow. This keeps the project easy to review and mirrors real data engineering project delivery.
+
+## What Version 1.0 Includes
+
+Version 1.0 includes the complete local SQLite project, documentation, validation, sample output queries, and portfolio-ready support files.

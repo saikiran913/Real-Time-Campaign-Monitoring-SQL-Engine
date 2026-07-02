@@ -1,27 +1,24 @@
 # SQL Scripts
 
-## 01_create_raw_tables.sql
+Run these files in numeric order. Later files depend on tables created by earlier files.
 
-Drops and recreates the Phase 1 raw tables using SQLite-compatible SQL.
+## Table-Creating Scripts
 
-## 02_insert_sample_data.sql
+- `01_create_raw_tables.sql`: Creates raw SQLite tables.
+- `02_insert_sample_data.sql`: Inserts synthetic sample data into raw tables.
+- `03_create_staging_tables.sql`: Creates and populates staging tables.
+- `05_kpi_calculations.sql`: Creates KPI fact and summary tables.
+- `06_budget_pacing_and_monitoring.sql`: Creates budget pacing and monitoring tables.
+- `07_anomaly_detection_and_alerts.sql`: Creates anomaly, alert, health score, critical campaign, and alert rule mapping tables.
 
-Inserts the same synthetic records that are provided in the CSV files under `data/raw/`.
+## SELECT-Only Scripts
 
-## 03_create_staging_tables.sql
+- `04_data_quality_checks.sql`: Data quality checks after staging.
+- `08_final_project_validation.sql`: Final project-level validation and review queries.
 
-Drops and recreates Phase 2 staging tables, then populates them from the raw tables. The script trims text, standardizes selected values, replaces null numeric values with `0`, and adds quality flags.
+## Safe Running Notes
 
-Bad rows are not removed silently. They remain in staging tables with flags such as `metric_quality_flag`, `is_known_campaign`, and `is_campaign_date_valid`.
-
-## 04_data_quality_checks.sql
-
-Contains SELECT-only checks for row counts, unknown campaign IDs, invalid dates, suspicious metrics, invalid budgets, invalid hourly records, missing alert rule details, and duplicate metric grains.
-
-## 05_kpi_calculations.sql
-
-Drops and recreates the Phase 3 KPI tables using only Phase 2 staging tables as sources. It creates daily and hourly performance facts, campaign summaries, platform summaries, region summaries, and daily/hourly trend summaries.
-
-The script calculates CTR, CPC, CPM, CVR, CPA, ROAS, and AOV with `CASE WHEN` divide-by-zero handling. It also adds target comparison statuses where target values exist.
-
-Phase 3 includes KPI calculation logic only. Budget pacing, anomaly detection, alert evaluation, and campaign health score logic will be added in later phases.
+- Run scripts in numeric order.
+- Do not run later scripts before dependencies exist.
+- Re-running table-creating scripts may drop and recreate their own output tables.
+- Validation scripts are SELECT-only and do not modify data.

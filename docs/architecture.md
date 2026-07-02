@@ -1,27 +1,49 @@
 # Architecture
 
-This is a local SQL simulation project built with synthetic CSV files, SQLite raw tables, SQLite staging tables, and KPI calculation tables.
+## Layered Architecture
 
-## Data Flow
+This project uses a layered SQLite architecture that mirrors a small analytics engineering workflow.
 
-Synthetic CSV data -> raw SQLite tables -> staging tables -> KPI calculation tables -> validation and reconciliation checks -> future budget pacing and alert engine
+```text
+Synthetic CSV data
+  -> raw SQLite tables
+  -> staging tables
+  -> KPI calculation tables
+  -> budget pacing and performance monitoring layer
+  -> anomaly detection and alert engine
+  -> campaign health score
+  -> investigation scenarios
+  -> final validation layer
+```
 
-## Phase 1 Architecture
+## Raw Layer
 
-The `data/raw/` folder stores the source-like CSV extracts. The `sql/` folder creates and loads raw SQLite tables. The `validation/` folder contains checks that confirm the load behaves as expected. Later phases will add cleaned staging models, KPI calculations, alerts, health scores, and reporting-ready outputs.
+The raw layer stores synthetic source-like records. It includes campaign master data, platforms, regions, calendar rows, daily metrics, hourly metrics, budgets, targets, and alert rules.
 
-## Phase 2 Architecture
+## Staging Layer
 
-Phase 2 adds staging tables populated from the raw tables. The staging layer keeps the raw row grain, cleans simple formatting issues, standardizes key values, and adds quality flags.
+The staging layer trims text, standardizes values, handles null numeric fields, and adds data quality flags. Bad rows are not removed silently.
 
-The staging layer does not remove bad rows silently. Rows with unknown campaign IDs, invalid metric dates, invalid budgets, suspicious metric relationships, or invalid hourly values remain available for review.
+## KPI Layer
 
-Future phases will use the staging layer as the input for KPI calculations, budget pacing, alert logic, and campaign health scoring.
+The KPI layer calculates CTR, CPC, CPM, CVR, CPA, ROAS, and AOV. It also creates campaign, platform, region, daily, and hourly summaries.
 
-## Phase 3 Architecture
+## Monitoring Layer
 
-Phase 3 creates KPI tables from the staging layer. The daily and hourly fact tables join staged metrics to campaign, platform, region, and target information. Summary tables aggregate those facts by campaign, platform, region, date, and hour.
+The monitoring layer adds budget pacing, projected spend, previous-day comparisons, and 7-day average comparisons.
 
-The KPI layer calculates CTR, CPC, CPM, CVR, CPA, ROAS, and AOV. Validation checks look for impossible KPI values and reconciliation checks confirm totals remain consistent between staging, fact, and summary layers.
+## Anomaly And Alert Layer
 
-Future phases will build budget pacing, alert generation, anomaly-style investigation logic, and campaign health scoring on top of the KPI layer.
+The anomaly layer flags campaign issues. The alert layer assigns severity, creates readable messages, and recommends actions.
+
+## Health Score Layer
+
+The health score layer assigns each campaign a score from 0 to 100 and classifies campaigns as Healthy, Watch, At Risk, or Critical.
+
+## Investigation Layer
+
+Investigation SQL files provide focused views for common campaign problems.
+
+## Final Validation Layer
+
+Final validation checks table existence, row counts, reconciliations, business outputs, alerts, and health scores.
